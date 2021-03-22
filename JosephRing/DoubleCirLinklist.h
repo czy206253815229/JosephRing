@@ -23,6 +23,8 @@ public:
     DoubleCirLinklist(int n);
     //析构函数
     ~DoubleCirLinklist();
+    //设置最初标记结点在几号
+    void SetMark(int x);
     //移动标记 direction移动方向 1为正向，0为反向， step移动步数
     void Move(bool direction, int step);
     //删除当前标记位元素 direction为移动方向，（保留direction原因是确定删除元素后mark应该在下一位还是在上一位）
@@ -77,6 +79,19 @@ DoubleCirLinklist::~DoubleCirLinklist()
         delete node;
         node = NULL;
     }
+}
+
+void DoubleCirLinklist::SetMark(int x)
+{
+    Node* node = head;
+    while (node->next != head && node->data != x)
+    {
+        node = node->next;
+    }
+    if (node->data == x)
+        mark = node;
+    else
+        throw "wrong parameter";
 }
 
 int DoubleCirLinklist::Delete(bool direction)
